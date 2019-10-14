@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Siege Workshop</title>
+        <h:outputStylesheet library = "css" name = "table.css"  /> 
+    </h:head>
+    <h:body>
+        <header>
+            <h1>Siege Workshop</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="storepage.xhtml">Store</a></li>
+                <li><a href="checkout.xhtml">Checkout</a></li>
+                <li><a href="staff/menu.xhtml">Staff</a></li>
+            </ul>
+        </nav>
+        <section>
+            <h:form>
+                <h1>Your Cart</h1>
+                <p>Review your items, then press checkout.</p>
+                <h:dataTable value = "#{shopCartManagedBean.cart}" var = "cartItem"
+                             styleClass = "productTable"
+                             headerClass = "productTableHeader"
+                             rowClasses = "productTableOddRow,productTableEvenRow">
+
+                    <h:column> 
+                        <f:facet name = "header">Name</f:facet>    				
+                            #{cartItem.name}
+                    </h:column>
+                    <h:column> 
+                        <f:facet name = "header">Quantity</f:facet>    				
+                            #{cartItem.quantity}
+                    </h:column>
+                    <h:column> 
+                        <f:facet name = "header">Wood Price</f:facet>    				
+                            #{cartItem.priceWood}
+                    </h:column>
+                    <h:column> 
+                        <f:facet name = "header">Gold Price</f:facet>    				
+                            #{cartItem.priceGold}
+                    </h:column>
+                    <h:column> 
+                        <f:facet name = "header">Add</f:facet>    				
+                        <h:commandButton value="Add" action="#{shopCartManagedBean.addItem(cartItem.productId)}"/>
+                    </h:column>
+                    <h:column> 
+                        <f:facet name = "header">Remove</f:facet>    				
+                        <h:commandButton value="Remove" action="#{shopCartManagedBean.removeItem(cartItem.productId)}"/>
+                    </h:column>
+                </h:dataTable>
+
+                <p> Wood Total: <h:outputText value="#{shopCartManagedBean.woodTotal}"/> </p>
+                <p> Gold Total: <h:outputText value="#{shopCartManagedBean.goldTotal}"/> </p>
+
+                <p><h:commandButton value="Checkout" action="#{shopCartManagedBean.checkout()}"/></p>
+                <p><h:commandButton value="Empty Cart" action="#{shopCartManagedBean.emptyCart()}"/></p>
+            </h:form>
+        </section>
+
+
+    </h:body>
+</html>
+

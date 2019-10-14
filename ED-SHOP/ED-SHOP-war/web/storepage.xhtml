@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Siege Workshop</title>
+        <h:outputStylesheet library = "css" name = "table.css"  /> 
+    </h:head>
+    <h:body>
+        <header>
+            <h1>Siege Workshop</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="storepage.xhtml">Store</a></li>
+                <li><a href="checkout.xhtml">Checkout</a></li>
+                <li><a href="staff/menu.xhtml">Staff</a></li>
+            </ul>
+        </nav>
+        <section>
+            <h:form>
+            <h1>Items for sale.</h1>
+            <p>Add items below into your cart to checkout</p>
+            <h:dataTable value = "#{shopManagedBean.products}" var = "product"
+                         styleClass = "productTable"
+                         headerClass = "productTableHeader"
+                         rowClasses = "productTableOddRow,productTableEvenRow">
+
+                <h:column> 
+                    <f:facet name = "header">Image</f:facet>    				
+                   
+                    <h:graphicImage name="#{product.thumbnail}" />
+                </h:column>
+                <h:column> 
+                    <f:facet name = "header">Name</f:facet>    				
+                        #{product.name}
+                </h:column>
+                <h:column> 
+                    <f:facet name = "header">Description</f:facet>    				
+                        #{product.description}
+                </h:column>
+                <h:column> 
+                    <f:facet name = "header">Amount in Stock</f:facet>    				
+                        #{product.quantity}
+                </h:column>
+                <h:column> 
+                    <f:facet name = "header">Wood Price</f:facet>    				
+                        #{product.priceWood}
+                </h:column>
+                <h:column> 
+                    <f:facet name = "header">Gold Price</f:facet>    				
+                        #{product.priceGold}
+                </h:column>
+                <h:column> 
+                    <f:facet name = "header">Add to Cart</f:facet>    				
+                    <h:commandButton value="Add" action="#{shopCartManagedBean.addItem(product.id)}"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        </section>
+        <h:outputText value="#{shopManagedBean.string}"/>
+    </h:body>
+</html>
+
